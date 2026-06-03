@@ -417,7 +417,16 @@ void il2cpp_dump(const char *outDir) {
         }
     }
     LOGI("write dump file");
-    auto outPath = std::string(outDir).append("/files/dump.cs");
+                    auto outPut = imageStr.str() + dump_type(type);
+                outPuts.push_back(outPut);
+            }
+        }
+    }
+    LOGI("write dump file");
+    
+    // CHANGE THIS: Route the dump file straight to the public Documents folder
+    auto outPath = std::string("/storage/emulated/0/Documents/dump.cs");
+    
     std::ofstream outStream(outPath);
     outStream << imageOutput.str();
     auto count = outPuts.size();
@@ -426,4 +435,3 @@ void il2cpp_dump(const char *outDir) {
     }
     outStream.close();
     LOGI("dump done!");
-}
