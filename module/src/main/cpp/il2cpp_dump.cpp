@@ -411,9 +411,13 @@ void il2cpp_dump(const char *outDir) {
         auto klass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
         auto type = il2cpp_class_get_type(klass);
         //LOGD("type name : %s", il2cpp_type_get_name(type));
-        auto outPut = imageStr.str() + dump_type(type);
+                auto outPut = imageStr.str() + dump_type(type);
         outPuts.push_back(outPut);
-    } // } Closes the for loop
+    } 
+    
+    // Add these two brackets to cleanly close lines 373 and 346
+    }
+} 
 
     LOGI("write dump file");
 
@@ -425,6 +429,6 @@ void il2cpp_dump(const char *outDir) {
     for (int i = 0; i < count; ++i) {
         outStream << outPuts[i];
     }
-    outStream.close();
+        outStream.close();
     LOGI("dump done!");
-} // } Closes the function
+} // Make sure this is a closing bracket!
