@@ -407,27 +407,19 @@ void il2cpp_dump(const char *outDir) {
             auto reflectionTypes = ((Assembly_GetTypes_ftn) assemblyGetTypes->methodPointer)(
                     reflectionAssembly, nullptr);
             auto items = reflectionTypes->vector;
-            for (int j = 0; j < reflectionTypes->max_length; ++j) {
-                auto klass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
-                auto type = il2cpp_class_get_type(klass);
-                //LOGD("type name : %s", il2cpp_type_get_name(type));
-                auto outPut = imageStr.str() + dump_type(type);
-                outPuts.push_back(outPut);
-            }
-        }
-    }
+                for (int j = 0; j < reflectionTypes->max_length; ++j) {
+        auto klass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
+        auto type = il2cpp_class_get_type(klass);
+        //LOGD("type name : %s", il2cpp_type_get_name(type));
+        auto outPut = imageStr.str() + dump_type(type);
+        outPuts.push_back(outPut);
+    } // } Closes the for loop
+
     LOGI("write dump file");
-                    auto outPut = imageStr.str() + dump_type(type);
-                outPuts.push_back(outPut);
-            }
-        }
-    }
-    LOGI("write dump file");
-    
-    // CHANGE THIS: Route the dump file straight to the public Documents folder
-    auto outPath = std::string("/storage/emulated/0/Documents/dump.cs");
-    
+
+    std::string outPath = "/storage/emulated/0/Documents/dump.cs";
     std::ofstream outStream(outPath);
+
     outStream << imageOutput.str();
     auto count = outPuts.size();
     for (int i = 0; i < count; ++i) {
@@ -435,3 +427,4 @@ void il2cpp_dump(const char *outDir) {
     }
     outStream.close();
     LOGI("dump done!");
+} // } Closes the function
