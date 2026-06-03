@@ -32,6 +32,9 @@ public:
 
     void postAppSpecialize(const AppSpecializeArgs *) override {
         if (enable_hack) {
+            // Delay the thread creation by 5 seconds
+            std::this_thread::sleep_for(std::chrono::seconds(5));
+
             std::thread hack_thread(hack_prepare, game_data_dir, data, length);
             hack_thread.detach();
         }
